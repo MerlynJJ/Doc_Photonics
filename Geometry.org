@@ -1,0 +1,26 @@
+* Geometry
+** Implementations
+***  Geometry From Epsilon
+**** Obligatorios
+  1. 'epsilon'=>(is=>'ro', isa=>'PDL::Complex', required=>1,
+		documentation=>'Dielectric function as function of position') 
+**** Opcionales 
+**** Prohibidas 
+  1. B' =>(is=>'ro', isa=>'PDL', init_arg=>undef, builder=>'_B', lazy=>1,
+	   documentation=>'charateristic function');
+***  Geometry FromB
+**** Obligatorias
+  1. 'B' =>(is=>'ro', isa=>'PDL', required documentation=>'charateristic function')
+  
+**** Opcionales
+**** Prohibidas
+***  Geometry From Image2D**** Obligatorios
+   1. path' => ( is => 'ro', required => 1,
+	       documentation => 'File name of 2D monochrome image' )
+    
+**** Opcionales
+   1. 'inverted' => (is=>'ro', default=> 0,
+               documentation=>'Flag to invert black/white');
+  
+**** Prohibidas  
+   1. B' => (is=>'ro', init_arg=>undef, lazy=>1, builder=>'_build_B' )

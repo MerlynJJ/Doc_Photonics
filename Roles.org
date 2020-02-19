@@ -1,0 +1,200 @@
+* Roles
+** AllH
+*** Obligatorias
+   1. has 'nh'=>(is=>'ro', required=>1, 
+         documentation=>'Maximum number of desired Haydock coefficients');
+   2. 
+
+*** Opcionales
+   1. 'keepStates'=>(is=>'ro', required=>1, default=>0, writer=> '_keepstates',
+        documentation=>'flag to keep Haydock states');
+   2. reorthogonalize=>(is=>'ro', required=>1, default=>0,
+         documentation=>'Reorthogonalize flag');
+   3.  'stateFN'=>(is=>'ro', required=>1, default=>undef, 
+	  documentation=>'Filename to save Haydock states');
+
+*** Prohibidas
+   1. 'states'=>(is=>'ro', isa=>'ArrayRef[PDL::Complex]', 
+         default=>sub{[]}, init_arg=>undef,
+         documentation=>'Saved states');
+   2. as=>(is=>'ro', default=>sub{[]}, init_arg=>undef,
+         documentation=>'Saved a coefficients');
+   3. bs=>(is=>'ro', default=>sub{[]}, init_arg=>undef,
+         documentation=>'Saved b coefficients');
+   4. b2s=>(is=>'ro', default=>sub{[]}, init_arg=>undef,
+         documentation=>'Saved b^2 coefficients');
+   5. cs=>(is=>'ro', isa=>'ArrayRef[Num]', default=>sub{[]}, init_arg=>undef,
+         documentation=>'Saved c coefficients');
+   6. bcs=>(is=>'ro', isa=>'ArrayRef[Num]', default=>sub{[]}, init_arg=>undef,
+         documentation=>'Saved b*c coefficients');
+   7. gs=>(is=>'ro', isa=>'ArrayRef[Num]', default=>sub{[]}, init_arg=>undef,
+         documentation=>'Saved g coefficients');
+   8. 'stateFD'=>(is=>'ro', init_arg=>undef, builder=>'_build_stateFD',lazy=>1, 
+        documentation=>'Filedescriptor to save Haydock states');  
+
+** EpsL
+*** Obligatorias
+   1. 'nr' =>(is=>'ro', isa=>'Photonic::Types::AllH', required=>1);
+*** Opcionales
+   1. 'nh' =>(is=>'ro', isa=>'Num', required=>1, lazy=>1, builder=>'_nh',
+	    documentation=>'Desired no. of Haydock coefficients');
+   2. 'smallE'=>(is=>'ro', isa=>'Num', required=>1, default=>1e-7,
+    	    documentation=>'Convergence criterium for use of Haydock coeff.');
+*** Prohibidas
+   1. 'epsL'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+	     writer=>'_epsL',
+	     documentation=>'Value of dielectric function'  );
+   2.  'nhActual'=>(is=>'ro', isa=>'Num', init_arg=>undef,
+		 writer=>'_nhActual',
+		 documentation=>'Actual number of coefficients used' );
+   3. 'converged'=>(is=>'ro', isa=>'Num', init_arg=>undef,
+		  writer=>'_converged',
+		  documentation=>'The calculation did converge');
+
+** EpsParams
+*** Obligatorias
+   1. 'nh' =>(is=>'ro', isa=>'Num', required=>1, 
+	    documentation=>'Desired no. of Haydock coefficients');
+*** Opcionales
+   1. 'smallH'=>(is=>'ro', isa=>'Num', required=>1, default=>1e-7,
+    	    documentation=>'Convergence criterium for Haydock coefficients');
+   2. 'smallE'=>(is=>'ro', isa=>'Num', required=>1, default=>1e-7,
+    	    documentation=>'Convergence criterium for use of Haydock coeff.');
+*** Prohibidas
+   1. 'epsA'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsA',
+   documentation=>'Dielectric function of host');
+   2. 'epsB'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsB',
+        documentation=>'Dielectric function of inclusions');
+   3. 'u'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_u',
+    documentation=>'Spectral variable');
+** Geometry
+*** Obligatorias
+*** Opcionales
+*** Prohibidas
+   1. 'dims' =>(is=>'ro', isa=>'Photonic::Types::ArrayOfOddInts', init_arg=>undef, lazy=>1, builder=>'_build_dims',
+          documentation=>'list of dimensions of B');
+   2. 'ndims' =>(is=>'ro', isa=>'Int',init_arg=>undef, lazy=>1, builder=>'_build_ndims',
+           documentation=>'number of dimensions of B');
+   3. 'npoints' =>(is=>'ro', isa=>'Int',init_arg=>undef, lazy=>1, builder=>'_build_npoints',
+           documentation=>'number of points within B');
+   4. 'scale'=>(is=>'ro', isa=>'PDL', init_arg=>undef, lazy=>1, builder=>'_build_scale',  
+	      documentation=>'distances between pixels');
+   5. 'r' =>(is=>'ro', isa=>'PDL', init_arg=>undef, lazy=>1, builder=>'_build_r', 
+	   documentation=>'array of positions x_or_y, nx, ny');
+   6. 'G' =>(is=>'ro', isa=>'PDL', init_arg=>undef, lazy=>1, builder=>'_build_G',
+	   documentation=>'array of reciprocal vectors x_or_y, nx, ny');
+   7. 'GNorm' =>(is=>'ro', isa=>'PDL', init_arg=>undef, lazy=>1, builder=>'_build_GNorm', 
+           documentation=>'array of unit norm reciprocal vectors x_or_y, nx, ny');
+   8. 'mGNorm' =>(is=>'ro', isa=>'PDL', init_arg=>undef, lazy=>1, builder=>'_build_mGNorm', 
+           documentation=>'array of negated unit norm reciprocal vectors x_or_y, nx, ny'); 
+   9. 'pmGNorm' =>(is=>'ro', isa=>'PDL', init_arg=>undef, lazy=>1, builder=>'_build_pmGNorm', 
+           documentation=>'array of spinors of +- unit norm reciprocal vectors x_or_y, nx, ny'); 
+   10. 'f'=>(is=>'ro', init_arg=>undef, lazy=>1, builder=>'_build_f',
+           documentation=>'filling fraction of B region');
+   11. 'unitPairs'=>(is=>'ro', isa=>'ArrayRef[PDL]', init_arg=>undef, lazy=>1, builder=>'_build_unitPairs', 
+           documentation=>'Normalized sum of pairs of basis vectors');
+   12. 'CunitPairs'=>(is=>'ro', isa=>'ArrayRef[PDL]', init_arg=>undef, lazy=>1, builder=>'_build_CunitPairs',
+           documentation=>'Normalized complex sum of pairs of basis vectors');
+   13. 'CCunitPairs'=>(is=>'ro', isa=>'ArrayRef[PDL]', init_arg=>undef, lazy=>1, builder=>'_build_CCunitPairs',
+           documentation=>'Normalized complex-conjugate sum of pairs of basis vectors');
+   14. 'unitDyads'=>(is=>'ro', isa=>'PDL', init_arg=>undef, lazy=>1, builder=>'_build_unitDyads',
+           documentation=>'Matrix of dyads of unit vector pairs');
+   15. 'unitDyadsLU'=>(is=>'ro', isa=>'ArrayRef', lazy=>1, builder=>'_build_unitDyadsLU',
+          documentation=>'LU decomposition of unitDyads');
+   16. 'L' =>(is=>'ro', isa => 'PDL', lazy=>1, builder=>'_build_L', 
+	  documentation=>'array of unit cell size');
+   17. 'units'=>(is=>'ro', isa=>'ArrayRef[PDL]', lazy=>1, builder=>'_build_units',
+         documentation=>'Basis of unit vectors');
+   18. 'Direction0' =>(is => 'rw', isa => 'PDL', trigger=>\&_G0, 
+           predicate=>'has_Direction0');
+
+** Metric
+*** Obligatorias
+   1. 'geometry'  => (is=>'ro', isa=>'Photonic::Types::Geometry', required=>1,
+         handles=>[qw(B dims ndims r G GNorm L scale f)],
+          required=>1, documentation=>'Geometry');
+   2.  'wavenumber'=> (is=>'ro', isa=>'PDL', required=>1,
+          documentation=>'Vacuum wavenumber w/c');
+
+*** Opcionales
+   1. 'epsilon'   => (is=>'ro', isa=>'PDL', required=>1,default=>sub{PDL->pdl(1)}, 
+         documentation=>'Real reference dielectric function');
+   2.  'wavevector'=> (is=>'ro', isa=>'PDL', required=>1,
+                   documentation=>'Wave vector');
+*** Prohibidas
+** KeepStates
+*** Obligatorias
+*** Opcionales
+   1. 'keepStates'=>(is=>'ro', required=>1, default=>0, writer=> '_keepstates',
+         documentation=>'flag to save Haydock states');
+
+*** Prohibida
+** OneH 
+*** Obligatorias
+*** Opcionales
+   1.  'smallH'=>(is=>'ro', isa=>'Num', required=>1, default=>1e-7,
+    	    documentation=>'Convergence criterium for Haydock coefficients');
+*** Prohibidas
+   1. 'firstState' =>(is=>'ro', isa=>'PDL::Complex', lazy=>1, builder=>'_firstState');
+   2. 'previousState' =>(is=>'ro', isa=>'PDL::Complex', writer=>'_previousState',  init_arg=>undef);
+   3. 'currentState' => (is=>'ro', isa=>'PDL::Complex', writer=>'_currentState',
+         lazy=>1, init_arg=>undef,  default=>sub {0+i*0});
+   4. 'nextState' =>(is=>'ro', isa=>maybe_type('PDL::Complex'), writer=>'_nextState', 
+          lazy=>1, builder=>'_firstRState');
+   5. 'current_a' => (is=>'ro', writer=>'_current_a',  init_arg=>undef);
+   6.  'current_b2' => (is=>'ro', writer=>'_current_b2', init_arg=>undef);
+   7. 'next_b2' => (is=>'ro', writer=>'_next_b2', init_arg=>undef, builder=>'_cero');
+   8. 'current_b' => (is=>'ro', writer=>'_current_b', init_arg=>undef);
+   9. 'next_b' => (is=>'ro', writer=>'_next_b', init_arg=>undef, builder=>'_cero');
+   10  'current_c' => (is=>'ro', writer=>'_current_c', init_arg=>undef); 
+   11. 'next_c' => (is=>'ro', writer=>'_next_c', init_arg=>undef, builder=>'_cero'); 
+   12. 	 'next_bc' => (is=>'ro', writer=>'_next_bc', init_arg=>undef, builder=>'_cero');
+   13. 'previous_g' => (is=>'ro', writer=>'_previous_g', init_arg=>undef);
+   14. 'current_g' => (is=>'ro', writer=>'_current_g', init_arg=>undef, builder=>'_cero');
+   15. 'next_g' => (is=>'ro', writer=>'_next_g', init_arg=>undef);
+   16. 'iteration' =>(is=>'ro', writer=>'_iteration', init_arg=>undef, default=>0);
+
+** ReorthogonalizeC
+*** Obligatorias
+*** Opcionales
+   1. 'normOp'=>(is=>'ro', required=>1, default=>1,
+	  documentation=>'Estimate of operator norm');
+
+*** Prohibidas
+   1. 'previous_W' =>(is=>'ro', writer=>'_previous_W', lazy=>1, init_arg=>undef,
+        default=>sub{(0+0*i)->(:,*1)}, documentation=>"Row of error matrix");
+   2. 'current_W' =>(is=>'ro', writer=>'_current_W', lazy=>1, init_arg=>undef,
+        default=>sub{(0+0*i)->(:,*1)}, documentation=>"Row of error matrix");
+   3. 'next_W' =>(is=>'ro', writer=>'_next_W', lazy=>1, init_arg=>undef,
+         builder=>'_build_next_W', documentation=>"Next row of error matrix");
+   4. 'accuracy'=>(is=>'ro', default=>sub{machine_epsilon()},
+          documentation=>'Desired or machine precision');
+   5. 'noise'=>(is=>'ro', default=>sub{machine_epsilon()},
+          documentation=>'Noise introduced each iteration to overlap matrix');
+   6. 'fullorthogonalize_N'=>(is=>'ro', init_arg=>undef, default=>0,
+	   writer=>'_fullorthogonalize_N',
+	   documentation=>'# desired reorthogonalizations');
+   7. 'orthogonalizations'=>(is=>'ro', init_arg=>undef, default=>0,
+	   writer=>'_orthogonalizations');
+
+** ReorthogonalizeR
+*** Obligatorias
+*** Opcionales
+   1. 'normOp'=>(is=>'ro', required=>1, default=>1,
+          documentation=>'Estimate of operator norm'); 
+*** Prohibidas
+   1. 'previous_W' =>(is=>'ro', writer=>'_previous_W', lazy=>1, init_arg=>undef,
+         default=>sub{PDL->pdl([0])}, documentation=>"Row of error matrix");
+   2. 'current_W' =>(is=>'ro',  writer=>'_current_W', lazy=>1, init_arg=>undef,
+         default=>sub{PDL->pdl([0])}, documentation=>"Row of error matrix"
+   3. 'next_W' =>(is=>'ro', writer=>'_next_W', lazy=>1, init_arg=>undef,
+         builder=>'_build_next_W', documentation=>"Next row of error matrix");
+   4. 'accuracy'=>(is=>'ro', default=>sub{machine_epsilon()},
+         documentation=>'Desired or machine precision');
+   5. 'noise'=>(is=>'ro', default=>sub{machine_epsilon()},
+         documentation=>'Noise introduced each iteration to overlap matrix');
+   6. fullorthogonalize_N=>(is=>'ro', init_arg=>undef, default=>0,
+           writer=>'_fullorthogonalize_N',
+	   documentation=>'# desired reorthogonalizations');
+   7. 'orthogonalizations'=>(is=>'ro', init_arg=>undef, default=>0,
+	   writer=>'_orthogonalizations');

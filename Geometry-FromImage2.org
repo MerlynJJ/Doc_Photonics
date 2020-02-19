@@ -1,0 +1,11 @@
+* Geometry From Image2D
+** Obligatorios
+   1. path' => ( is => 'ro', required => 1,
+	       documentation => 'File name of 2D monochrome image' )
+    
+** Opcionales
+   1. 'inverted' => (is=>'ro', default=> 0,
+               documentation=>'Flag to invert black/white');
+  
+** Prohibidas  
+   1. B' => (is=>'ro', init_arg=>undef, lazy=>1, builder=>'_build_B' )

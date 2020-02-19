@@ -1,0 +1,23 @@
+*  LE NP EpsTensor (Tensor Dieléctrico)
+** Obligatorios
+  1.'epsilon'=>(is=>'ro', isa=>'PDL::Complex', required=>1)
+  2.'geometry'=>(is=>'ro', isa => 'Photonic::Geometry',
+    handles=>[qw(B dims r G GNorm L scale f)],required=>1)
+   
+** Opcionales
+  1. 'reorthogonalize'=>(is=>'ro', required=>1, default=>0,
+         documentation=>'Reorthogonalize haydock flag')
+  
+** Prohibidas 
+  1. 'nr' =>(is=>'ro', isa=>'ArrayRef[Photonic::LE::NP::AllH]',
+            init_arg=>undef, lazy=>1, builder=>'_build_nr',
+            documentation=>'Array of Haydock calculators')
+  2. 'epsL'=>(is=>'ro', isa=>'ArrayRef[Photonic::LE::NP::EpsL]',
+             init_arg=>undef, lazy=>1, builder=>'_build_epsL',
+             documentation=>'Array of epsilon calculators')
+  3.  'epsTensor'=>(is=>'ro', isa=>'PDL', init_arg=>undef, lazy=>1,
+		  builder=>'_build_epsTensor',
+		  documentation=>'Dielectric Tensor')
+  4.  'converged'=>(is=>'ro', init_arg=>undef, writer=>'_converged',
+             documentation=>
+                  'All EpsL evaluations converged in last evaluation')

@@ -1,0 +1,10 @@
+* LE NP OneH
+** Obligarorias
+** Opcionales
+  1. 'epsilon'=>(is=>'ro', isa=>'PDL::Complex', required=>1, lazy=>1,
+		builder=>'_epsilon');
+
+** Prohibidas
+  1. 'complexCoeffs'=>(is=>'ro', init_arg=>undef, default=>1,
+		        documentation=>'Haydock coefficients are complex');
+  2. '+nextState' =>(init_arg=>undef); 

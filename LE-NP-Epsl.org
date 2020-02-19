@@ -1,0 +1,15 @@
+*  LE NP EpsTensor (Tensor Dieléctrico)
+** Obligatorios
+  1.'nr' =>(is=>'ro', isa=>'Photonic::LE::NP::AllH', required=>1)
+  2.'epsilon'=>(is=>'ro', isa=>'PDL::Complex', required=>1)
+  3.'geometry'=>(is=>'ro', isa => 'Photonic::Geometry',
+    handles=>[qw(B dims r G GNorm L scale f)],required=>1)
+** Opcionales
+  1. 'reorthogonalize'=>(is=>'ro', required=>1, default=>0,
+         documentation=>'Reorthogonalize haydock flag')
+  
+** Prohibidas 
+  1. 'epsL'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsL');
+  2. 'nhActual'=>(is=>'ro', isa=>'Num', init_arg=>undef, 
+                 writer=>'_nhActual');
+  3. 'converged'=>(is=>'ro', isa=>'Num', init_arg=>undef, writer=>'_converged');

@@ -1,0 +1,273 @@
+* LE
+** NP
+*** LE NP EpsTensor (Tensor Dieléctrico)
+**** Obligatorios
+  1.'nr' =>(is=>'ro', isa=>'Photonic::LE::NP::AllH', required=>1)
+  2.'epsilon'=>(is=>'ro', isa=>'PDL::Complex', required=>1)
+  3.'geometry'=>(is=>'ro', isa => 'Photonic::Geometry',
+    handles=>[qw(B dims r G GNorm L scale f)],required=>1)
+**** Opcionales
+  1. 'reorthogonalize'=>(is=>'ro', required=>1, default=>0,
+         documentation=>'Reorthogonalize haydock flag')
+  
+**** Prohibidas 
+  1. 'epsL'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsL');
+  2. 'nhActual'=>(is=>'ro', isa=>'Num', init_arg=>undef, 
+                 writer=>'_nhActual');
+  3. 'converged'=>(is=>'ro', isa=>'Num', init_arg=>undef, writer=>'_converged');
+*** LE NP EpsTensor (Tensor Dieléctrico)
+**** Obligatorios
+  1.'epsilon'=>(is=>'ro', isa=>'PDL::Complex', required=>1)
+  2.'geometry'=>(is=>'ro', isa => 'Photonic::Geometry',
+    handles=>[qw(B dims r G GNorm L scale f)],required=>1)
+   
+**** Opcionales
+  1. 'reorthogonalize'=>(is=>'ro', required=>1, default=>0,
+         documentation=>'Reorthogonalize haydock flag')
+  
+**** Prohibidas 
+  1. 'nr' =>(is=>'ro', isa=>'ArrayRef[Photonic::LE::NP::AllH]',
+            init_arg=>undef, lazy=>1, builder=>'_build_nr',
+            documentation=>'Array of Haydock calculators')
+  2. 'epsL'=>(is=>'ro', isa=>'ArrayRef[Photonic::LE::NP::EpsL]',
+             init_arg=>undef, lazy=>1, builder=>'_build_epsL',
+             documentation=>'Array of epsilon calculators')
+  3.  'epsTensor'=>(is=>'ro', isa=>'PDL', init_arg=>undef, lazy=>1,
+		  builder=>'_build_epsTensor',
+		  documentation=>'Dielectric Tensor')
+  4.  'converged'=>(is=>'ro', init_arg=>undef, writer=>'_converged',
+             documentation=>
+                  'All EpsL evaluations converged in last evaluation')
+*** LE NP OneH
+**** Obligarorias
+**** Opcionales
+  1. 'epsilon'=>(is=>'ro', isa=>'PDL::Complex', required=>1, lazy=>1,
+		builder=>'_epsilon');
+
+**** Prohibidas
+  1. 'complexCoeffs'=>(is=>'ro', init_arg=>undef, default=>1,
+		        documentation=>'Haydock coefficients are complex');
+  2. '+nextState' =>(init_arg=>undef); 
+
+** NR2 
+*** LE NR2 EpsTensor
+**** Obligatorias
+  1. 'geometry'=>(is=>'ro', isa => 'Photonic::Types::Geometry',
+    handles=>[qw(B dims r G GNorm L scale f)],required=>1);
+
+**** Opcionales
+  1. 'reorthogonalize'=>(is=>'ro', required=>1, default=>0,
+         documentation=>'Reorthogonalize haydock flag'); 
+
+**** Prohibidas
+  1. 'nr' =>(is=>'ro', isa=>'ArrayRef[Photonic::LE::NR2::AllH]',
+            init_arg=>undef, lazy=>1, builder=>'_build_nr',
+            documentation=>'Array of Haydock calculators');
+  2. 'epsL'=>(is=>'ro', isa=>'ArrayRef[Photonic::LE::NR2::EpsL]',
+             init_arg=>undef, lazy=>1, builder=>'_build_epsL',
+             documentation=>'Array of epsilon calculators');
+  3. 'epsTensor'=>(is=>'ro', isa=>'PDL', init_arg=>undef, writer=>'_epsTensor', 
+             documentation=>'Dielectric Tensor from last evaluation');
+  4. 'converged'=>(is=>'ro', init_arg=>undef, writer=>'_converged',
+             documentation=>'All EpsL evaluations converged in last evaluation'); 
+*** LE NR2 OneH
+**** Obligatorias
+   1. 'geometry'=>(is=>'ro', isa => 'Photonic::Types::GeometryG0',
+    handles=>[qw(B dims ndims r G GNorm L scale f)],required=>1);
+**** Opcionales
+**** Prohibidas 
+   1. 'complexCoeffs'=>(is=>'ro', init_arg=>undef, default=>0,
+		      documentation=>'Haydock coefficients are real');
+   
+*** LE NR2 SH
+****  Obligatorias
+   1. 'shp'=>(is=>'ro', 'isa'=>'Photonic::LE::NR2::SHP', required=>1,
+    handles=>[qw(ndims nrf densityA densityB density nr)],
+    documentation=>'Object with invariant part of SHG calculation')
+   2. 'epsA1'=>(is=>'ro', isa=>'PDL::Complex', required=>1,
+    documentation=>'Fundamental dielectric function of host')
+   3. 'epsB1'=>(is=>'ro', isa=>'PDL::Complex', 
+        documentation=>'Fundamental dielectric function of inclusions')
+   4. 'epsA2'=>(is=>'ro', isa=>'PDL::Complex', required=>1,
+    documentation=>'SH Dielectric function of host')
+   5. 'epsB2'=>(is=>'ro', isa=>'PDL::Complex', required=>1, 
+      documentation=>'SH Dielectric function of inclusions')
+**** Opcionales
+**** Prohibidas
+   1. 'alpha1'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+         lazy=>1, builder=>'_build_alpha1', 
+         documentation=>'Linear "atomic" polarizability');
+   2. 'alpha2'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+        lazy=>1, builder=>'_build_alpha2', 
+        documentation=>'SH linear "atomic" polarizability');
+   3. 'u1'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+        lazy=>1, builder=>'_build_u1', 
+        documentation=>'Spectral variable at fundamental');
+   4. 'u2'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+         lazy=>1, builder=>'_build_u2',  
+         documentation=>'Spectral variable at SH');
+   5. 'field1'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+        lazy=>1, builder=>'_build_field1', 
+        documentation=>'longitudinal field at fundamental');
+   6. 'field2'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+        lazy=>1, builder=>'_build_field2', 
+        documentation=>'longitudinal field at second harmonic');
+   7. 'epsL2'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+       writer=>'_epsL2', predicate=>'has_epsL2', 
+       documentation=>'longitudinal dielectric function at 2w');
+   8. 'dipolar'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+       lazy=>1, builder=>'_build_dipolar', 
+       documentation=>'SH dipolar contribution to SH polarization');
+   9. 'quadrupolar'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+       lazy=>1, builder=>'_build_quadrupolar', 
+       documentation=>'SH quadrupolar contribution to SH polarization');
+   10. 'external'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+        lazy=>1, builder=>'_build_external', 
+        documentation=>'SH external contribution to SH polarization');
+   11. 'external_G'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+       lazy=>1, builder=>'_build_external_G',
+       documentation=>'SH ext. polarization in reciprocal space');
+   12. 'externalL_G'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+       lazy=>1, builder=>'_build_externalL_G', 
+       documentation=>'SH ext. longitudinal polarization comp. in reciprocal space');
+   13. 'externalVecL_G'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+        lazy=>1, builder=>'_build_externalVecL_G', 
+        documentation=>'SH ext. longitudinal polarization proj. in recip. space');
+   14. 'externalVecL'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+        lazy=>1, builder=>'_build_externalVecL', 
+        documentation=>'SH ext. longitudinal polarization proj. in real space');
+   15. 'HP' =>(is=>'ro', isa=>'Photonic::LE::NR2::AllH', init_arg=>undef,
+         lazy=>1, builder=>'_build_HP',
+         documentation=>'Structure to calculate Haydock basis for non linear polarization');
+   16. 'externalL_n'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+         lazy=>1, builder=>'_build_externalL_n', 
+         documentation=>'SH ext. longitudinal polarization in Haydock representation');
+   17. 'selfConsistentL_n'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, lazy=>1,builder=>'_build_selfConsistentL_n',
+        documentation=>'SH self consistent longitudinal polarization in Haydock representation');
+   18. 'selfConsistentL_G'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, lazy=>1,builder=>'_build_selfConsistentL_G',
+        documentation=>'SH self consistent longitudinal polarization components in reciprocal space');
+   19. 'selfConsistentVecL_G'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, lazy=>1, builder=>'_build_selfConsistentVecL_G',
+       documentation=>'SH self consistent longitudinal polarization vectorfield in reciprocal space');
+   20. 'selfConsistentVecL'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, lazy=>1, builder=>'_build_selfConsistentVecL',
+       documentation=> 'SH self consistent longitudinal polarization vector field in real space');
+   21. 'P2'=>(is=>'ro', isa=>'PDL::Complex',  init_arg=>undef, lazy=>1, builder=>'_build_P2',
+         documentation=>'SH self consistent total polarization vector field in real space');
+   22. 'P2LMCalt'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, lazy=>1, builder=>'_build_P2LMCalt',
+        documentation=> 'SH self consistent total macroscopic polarization in real space. Alternative');
+   23.  'filterflag'=>(is=>'rw', 
+         documentation=>'Filter results in reciprocal space');
+
+*** LE NR2 EpsL.pm
+**** Obligatorias 
+**** Opcionales
+**** Prohibidas 
+   1. 'epsA'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsA',
+    documentation=>'Dielectric function of host');
+   2. 'epsB'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsB',
+       documentation=>'Dielectric function of inclusions');
+   3. 'u'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_u',
+    documentation=>'Spectral variable');
+
+*** LE NR2 Field
+**** Obligatorias 
+   1. 'nr'=>(is=>'ro', isa=>'Photonic::Types::AllHSave', required=>1,  
+      documentation=>'Haydock recursion calculator');
+**** Opcionales
+   1.  'filter'=>(is=>'ro', isa=>'PDL', predicate=>'has_filter',
+               documentation=>'Optional reciprocal space filter');
+**** Prohibidas 
+   1. 'Es'=>(is=>'ro', isa=>'ArrayRef[PDL::Complex]', init_arg=>undef, 
+           writer=>'_Es', documentation=>'Field coefficients');
+   2. 'field'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef,
+          writer=>'_field', documentation=>'Calculated real space field');
+   3. 'epsL' =>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsL', 
+	documentation=>'Longitudinal dielectric response');
+   
+*** LE NR2 SHChiTensor
+**** Obligatorias 
+   1. 'geometry'=>(is=>'ro', isa => 'Photonic::Geometry',
+    handles=>[qw(B dims r G GNorm L scale f)],required=>1);
+   2. 'densityA'=>(is=>'ro', isa=>'Num', required=>1,
+       documentation=>'Normalized dipole entities density in medium A');
+   3. 'densityB'=>(is=>'ro', isa=>'Num', required=>1,
+         documentation=>'Normalized dipole entities density in medium B');
+   4.  'nhf'=>(is=>'ro', required=>1,  documentation=>'Maximum number of desired Haydock
+        coefficients for field calculation');
+**** Opcionales
+   1. 'reorthogonalize'=>(is=>'ro', required=>1, default=>0,
+        documentation=>'Reorthogonalize haydock flag');
+   2. 'filter'=>(is=>'ro', isa=>'PDL', predicate=>'has_filter',
+               documentation=>'Optional reciprocal space filter');
+
+**** Prohibidas
+   1. 'epsA1'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsA1',
+        documentation=>'Dielectric function of host');
+   2. 'epsB1'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsB1',
+        documentation=>'Dielectric function of inclusions');
+   3. 'epsA2'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsA2',
+        documentation=>'Dielectric function of host');
+   4. 'epsB2'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsB2',
+        documentation=>'Dielectric function of inclusions');
+   5. 'nrshp' =>(is=>'ro', isa=>'ArrayRef[Photonic::LE::NR2::SHP]',init_arg=>undef,
+        lazy=>1, builder=>'_build_nrshp', documentation=>'Array of Haydock SH polarization calculators');
+   6. 'epsTensor'=>(is=>'ro', isa=>'Photonic::LE::NR2::EpsTensor', init_arg=>undef,  lazy=>1, 
+        builder=>'_build_epsTensor', documentation=>'diel. tensor at 2w');
+   7. 'chiTensor'=>(is=>'ro', isa=>'PDL', init_arg=>undef, writer=>'_chiTensor', 
+             documentation=>'SH Susceptibility from last evaluation');
+	     
+*** LE NR2 SHP
+**** Obligatorias
+   1. 'nrf'=>(is=>'ro', isa=>'Photonic::LE::NR2::Field', required=>1,
+         documentation=>'Haydock field calculator')
+   2. 'densityA'=>(is=>'ro', isa=>'Num', required=>1,
+        documentation=>'Normalized dipole entities density in medium A');
+   3. 'densityB'=>(is=>'ro', isa=>'Num', required=>1,
+        documentation=>'Normalized dipole entities density in medium B');
+
+**** Opcionales 
+**** Prohibidas
+   1. 'density'=>(is=>'ro', isa=>'PDL', writer=>'_density', init_arg=>undef,
+        documentation=>'Normalized dipole entities density over unit cell');
+   2.  'ndims' =>(is=>'ro', isa=>'Int', init_arg=>undef, lazy=>1, builder=>'_ndims', 
+         documentation=>'Number of dimensions of system');
+
+** S
+*** LE S EpsL
+**** Obligatorias 
+   1. 'nr' =>(is=>'ro', isa=>'Photonic::LE::S::AllH', required=>1);
+
+**** Opcionales
+**** Prohibidas
+   1. 'epsL'=>(is=>'ro', isa=>'PDL::Complex', init_arg=>undef, writer=>'_epsL');
+   2. 'nhActual'=>(is=>'ro', isa=>'Num', init_arg=>undef, writer=>'_nhActual');
+   3. 'converged'=>(is=>'ro', isa=>'Num', init_arg=>undef, writer=>'_converged');
+
+*** LE S EpsTensor
+**** Obligatorias
+   1. 'epsilon'=>(is=>'ro', isa=>'PDL::Complex', required=>1);
+   2. 'geometry'=>(is=>'ro', isa => 'Photonic::Types::Geometry',
+       handles=>[qw(B dims r G GNorm L scale f)],required=>1);
+**** Opcionales
+   1. 'reorthogonalize'=>(is=>'ro', required=>1, default=>0,
+         documentation=>'Reorthogonalize haydock flag');
+**** Prohibidas
+   1. 'nr' =>(is=>'ro', isa=>'ArrayRef[Photonic::LE::S::AllH]',
+            init_arg=>undef, lazy=>1, builder=>'_build_nr',
+            documentation=>'Array of Haydock calculators');
+   2. 'epsL'=>(is=>'ro', isa=>'ArrayRef[Photonic::LE::S::EpsL]',
+            init_arg=>undef, lazy=>1, builder=>'_build_epsL',
+            documentation=>'Array of epsilon calculators');
+   3. 'epsTensor'=>(is=>'ro', isa=>'PDL', init_arg=>undef, lazy=>1,
+           builder=>'_build_epsTensor', documentation=>'Dielectric Tensor');
+   4. 'converged'=>(is=>'ro', init_arg=>undef, writer=>'_converged',
+            documentation=> 'All EpsL evaluations converged in last evaluation'); 
+*** LE S OneH
+**** Obligatorias
+   1. 'geometry'=>(is=>'ro', isa => 'Photonic::Types::GeometryG0',
+        handles=>[qw(B ndims dims r G GNorm L scale f pmGNorm)],required=>1);
+**** Opcionales
+   1. 'epsilon'=>(is=>'ro', isa=>'PDL::Complex', required=>1, lazy=>1,
+	       builder=>'_epsilon');
+**** Prohibidas
+   1. 'complexCoeffs'=>(is=>'ro', init_arg=>undef, default=>1,
+         documentation=>'Haydock coefficients are complex'); 

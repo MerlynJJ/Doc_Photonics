@@ -1,0 +1,8 @@
+* Geometry From Epsilon
+** Obligatorios
+  1. 'epsilon'=>(is=>'ro', isa=>'PDL::Complex', required=>1,
+		documentation=>'Dielectric function as function of position') 
+** Opcionales
+** Prohibidas 
+ 1. B' =>(is=>'ro', isa=>'PDL', init_arg=>undef, builder=>'_B', lazy=>1,
+	   documentation=>'charateristic function');

@@ -1,0 +1,6 @@
+* Geometry FromB
+** Obligatorias
+  1. 'B' =>(is=>'ro', isa=>'PDL', required documentation=>'charateristic function')
+  
+** Opcionales
+** No necesarias 
