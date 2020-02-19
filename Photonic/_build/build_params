@@ -1,0 +1,188 @@
+do{ my $x = [
+       {
+         'ARGV' => []
+       },
+       {},
+       {
+         'PL_files' => undef,
+         '_added_to_INC' => [
+                              '/home/merlyn/Documents/Lib-Photonic/Photonic/_build/lib'
+                            ],
+         'allow_mb_mismatch' => 0,
+         'allow_pureperl' => 0,
+         'auto_configure_requires' => 1,
+         'autosplit' => undef,
+         'base_dir' => '/home/merlyn/Documents/Lib-Photonic/Photonic',
+         'bindoc_dirs' => [
+                            'blib/script'
+                          ],
+         'blib' => 'blib',
+         'build_bat' => 0,
+         'build_class' => 'MyModuleBuilder',
+         'build_elements' => [
+                               'PL',
+                               'support',
+                               'pm',
+                               'xs',
+                               'share_dir',
+                               'pod',
+                               'script'
+                             ],
+         'build_requires' => {
+                               'ExtUtils::CBuilder' => '0.23',
+                               'ExtUtils::F77' => 0,
+                               'Module::Build::Pluggable::Fortran' => '0.27',
+                               'Module::Build::Pluggable::PDL' => '0.23',
+                               'PDL' => '2.006'
+                             },
+         'build_script' => 'Build',
+         'bundle_inc' => [],
+         'bundle_inc_preload' => [],
+         'c_source' => undef,
+         'config' => undef,
+         'config_dir' => '_build',
+         'configure_requires' => {
+                                   'ExtUtils::CBuilder' => '0',
+                                   'ExtUtils::F77' => '1.23',
+                                   'File::Basename' => '0',
+                                   'File::Copy' => '0',
+                                   'File::Spec' => '0',
+                                   'Module::Build' => '0.4224',
+                                   'Module::Build::Pluggable' => '0.10',
+                                   'Module::Build::Pluggable::Fortran' => '0.27',
+                                   'Module::Build::Pluggable::PDL' => '0.23'
+                                 },
+         'conflicts' => {},
+         'cover' => undef,
+         'cpan_client' => 'cpan',
+         'create_license' => undef,
+         'create_makefile_pl' => 'small',
+         'create_packlist' => 1,
+         'create_readme' => undef,
+         'debug' => undef,
+         'debugger' => undef,
+         'destdir' => undef,
+         'dist_abstract' => undef,
+         'dist_author' => [
+                            'W. Luis Mochan <mochan@fis.unam.mx>',
+                            'Guillermo Ortiz <gortiz@exa.unne.edu.ar>',
+                            'Bernardo S. Mendoza <bms@cio.mx>',
+                            'Jose Samuel Perez-Huerta <jsperez@fisica.uaz.edu.mx>'
+                          ],
+         'dist_name' => 'Photonic',
+         'dist_suffix' => undef,
+         'dist_version' => '0.011',
+         'dist_version_from' => 'lib/Photonic.pm',
+         'dynamic_config' => 1,
+         'extra_compiler_flags' => [],
+         'extra_linker_flags' => [
+                                   '-L/usr/lib/gcc/x86_64-linux-gnu/8',
+                                   '-L/usr/lib',
+                                   '-lgfortran',
+                                   '-lm',
+                                   'fortran/cgtsl.o',
+                                   'fortran/dgtsl.o'
+                                 ],
+         'extra_manify_args' => undef,
+         'f_source' => [
+                         'fortran'
+                       ],
+         'get_options' => {},
+         'has_config_data' => undef,
+         'html_css' => '',
+         'include_dirs' => [
+                             '/home/merlyn/perl5/perlbrew/perls/perl-5.28.1/lib/site_perl/5.28.1/x86_64-linux/PDL/Core'
+                           ],
+         'install_base' => undef,
+         'install_base_relpaths' => {},
+         'install_path' => {},
+         'install_sets' => {},
+         'installdirs' => 'site',
+         'libdoc_dirs' => [
+                            'blib/lib',
+                            'blib/arch'
+                          ],
+         'license' => 'perl',
+         'magic_number' => undef,
+         'mb_version' => '0.4224',
+         'meta_add' => {},
+         'meta_merge' => {},
+         'metafile' => 'META.yml',
+         'metafile2' => 'META.json',
+         'module_name' => 'Photonic',
+         'mymetafile' => 'MYMETA.yml',
+         'mymetafile2' => 'MYMETA.json',
+         'needs_compiler' => '',
+         'orig_dir' => '/home/merlyn/Documents/Lib-Photonic/Photonic',
+         'original_prefix' => {},
+         'perl' => '/home/merlyn/perl5/perlbrew/perls/perl-5.28.1/bin/perl',
+         'pm_files' => undef,
+         'pod_files' => undef,
+         'pollute' => undef,
+         'prefix' => undef,
+         'prefix_relpaths' => {},
+         'prereq_action_types' => [
+                                    'requires',
+                                    'build_requires',
+                                    'test_requires',
+                                    'conflicts',
+                                    'recommends'
+                                  ],
+         'program_name' => undef,
+         'pureperl_only' => 0,
+         'quiet' => undef,
+         'recommends' => {},
+         'recurse_into' => [],
+         'recursive_test_files' => undef,
+         'release_status' => 'stable',
+         'requires' => {
+                         'Carp' => '0',
+                         'Cwd' => '0',
+                         'DynaLoader' => '0',
+                         'English' => '0',
+                         'ExtUtils::F77' => '1.23',
+                         'IO::File' => '0',
+                         'Inline' => '0',
+                         'List::MoreUtils' => '0',
+                         'List::Util' => '0',
+                         'Machine::Epsilon' => '0',
+                         'Moose' => '0',
+                         'Moose::Role' => '0',
+                         'Moose::Util::TypeConstraints' => '0',
+                         'MooseX::StrictConstructor' => '0',
+                         'PDL' => '2.006',
+                         'PDL::Complex' => '2.009',
+                         'PDL::Constants' => '0',
+                         'PDL::Core' => '0',
+                         'PDL::Core::Dev' => '0',
+                         'PDL::Exporter' => '0',
+                         'PDL::FFTW3' => '0',
+                         'PDL::IO::Pic' => '0',
+                         'PDL::IO::Storable' => '0',
+                         'PDL::Lite' => '0',
+                         'PDL::MatrixOps' => '0',
+                         'PDL::NiceSlice' => '0',
+                         'Storable' => '0'
+                       },
+         'script_files' => undef,
+         'scripts' => undef,
+         'share_dir' => undef,
+         'sign' => undef,
+         'tap_harness_args' => {},
+         'test_file_exts' => [
+                               '.t'
+                             ],
+         'test_files' => undef,
+         'test_requires' => {
+                              'Pod::Coverage::TrustPod' => '0',
+                              'Test::More' => '0',
+                              'Test::Pod' => '0',
+                              'Test::Pod::Coverage' => '1.08'
+                            },
+         'use_rcfile' => 1,
+         'use_tap_harness' => 0,
+         'verbose' => undef,
+         'xs_files' => undef
+       }
+     ];
+$x; }

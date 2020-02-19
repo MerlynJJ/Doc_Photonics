@@ -1,0 +1,15 @@
+do{ my $x = {
+       '.xs' => 1,
+       'Photonic-*' => 1,
+       'blib' => 1,
+       'blib/arch/auto/Photonic/ExtraUtils/ExtraUtils.bs' => 1,
+       'blib/arch/auto/Photonic/ExtraUtils/ExtraUtils.so' => 1,
+       'f77_underscore' => 1,
+       'fortran/cgtsl.o' => 1,
+       'fortran/dgtsl.o' => 1,
+       'lib/Photonic/ExtraUtils.c' => 1,
+       'lib/Photonic/ExtraUtils.o' => 1,
+       'lib/Photonic/ExtraUtils.pm' => 1,
+       'lib/Photonic/ExtraUtils.xs' => 1
+     };
+$x; }
